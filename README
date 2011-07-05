@@ -1,0 +1,63 @@
+NAME
+  Directory Content Synchronization Tool 1.2.0.0
+
+SYNOPSIS
+  Usage: dirsync [<options>] <source> <target>
+   source: Path to the directory to read from.
+   target: Path to the directory to write to.
+  Options:
+   -e, --exclude:<names>    - Comma-delimited list of exclusions; file or folder
+                              names with optional nested level to exclude from
+                              the operations.
+   -h, --help               - Prints this usage information.
+   -o, --operations:<names> - Comma-delimited list of operations to execute; all
+                              is default.
+  Operations to be performed in the target directory:
+    all:    All three operations (default).
+    delete: Delete items missing under the source directory.
+    update: Update files different from the source directory.
+    create: Create new files appeared in the source directory.
+  An exclusion consists of a source file/folder name and of an optional directory
+  nested level. 0 is for the first level and -1 for all levels (default).
+
+DESCRIPTION
+  Makes the content of a target directory the same as of the source one. Deletes
+  extraneous, updates modified and creates new folders and files from, in and to
+  the target directory in the optimal order. Works recursively in subdirectories.
+
+  If you synchronize large directories having little free space on the target
+  drive you may run out of space although he source and target drives are the
+  same. If the first synchronizing operation is not the deletion updating and
+  creating operations will exceed the free space before the obsolete files could
+  be deleted. This tool deletes at first, then it updates changed files and at
+  last it creates new files and folders to prevent the early exhaustion.
+
+EXAMPLES
+  Synchronize a single directory:
+    dirsync D:\Movies E:\Movies
+  Synchronize two directories preventing the space exhaustion on E: by performing
+  deletions in all synchronized directories at first:
+    dirsync -o=delete D:\Movies E:\Movies
+    dirsync -o=delete D:\Music E:\Music
+    dirsync -o=update,create D:\Movies E:\Movies
+    dirsync -o=update,create D:\Music E:\Music
+  Synchronize two directories excluding folders "Temp" at any nested level and
+  the folder "Private" at the first level (Photos\Private):
+    dirsync -e=Temp,Private:0 D:\Photos E:\Photos
+
+LICENSE
+  Copyright (C) 2009-2011 Ferdinand Prantl <prantlf@gmail.com>
+  All rights reserved.       
+
+  dirsync is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  dirsync is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with dirsync.  If not, see <http://www.gnu.org/licenses/>.
