@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
 		README = README
+		COMPILE = COMPILE
 	EndProjectSection
 EndProject
 Global
@@ -19,6 +20,48 @@ Global
 		{27DD8E27-5D92-4E39-8CC3-0A4058DC5838}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27DD8E27-5D92-4E39-8CC3-0A4058DC5838}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27DD8E27-5D92-4E39-8CC3-0A4058DC5838}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = dirsync.csproj
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.inheritsSet = null
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
+		$2.scope = text/x-csharp
+		$0.TextStylePolicy = $3
+		$3.FileWidth = 120
+		$3.NoTabsAfterNonTabs = True
+		$3.RemoveTrailingWhitespace = True
+		$3.inheritsSet = VisualStudio
+		$3.inheritsScope = text/plain
+		$3.scope = text/plain
+		$0.TextStylePolicy = $4
+		$4.inheritsSet = null
+		$4.scope = application/config+xml
+		$0.XmlFormattingPolicy = $5
+		$5.inheritsSet = null
+		$5.scope = application/config+xml
+		$0.TextStylePolicy = $6
+		$6.FileWidth = 120
+		$6.TabWidth = 2
+		$6.NoTabsAfterNonTabs = True
+		$6.RemoveTrailingWhitespace = True
+		$6.inheritsSet = VisualStudio
+		$6.inheritsScope = text/plain
+		$6.scope = application/xml
+		$0.XmlFormattingPolicy = $7
+		$7.inheritsSet = Mono
+		$7.inheritsScope = application/xml
+		$7.scope = application/xml
+		$0.StandardHeader = $8
+		$8.inheritsSet = GPLv3License
+		description = Makes the content of a target directory the same as of the source one. Deletes extraneous, updates modified and creates new files from, in and to the target directory in the optimal order. Works recursively in subdirectories.
+		version = 1.3
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

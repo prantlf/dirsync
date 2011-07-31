@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SynchronizationStarted" xml:space="preserve">
+    <value>Verzeichnisinhaltsynchronisieren von "{0}" zu "{1}" fing an.</value>
+  </data>
+  <data name="SynchronizationSucceeded" xml:space="preserve">
+    <value>Verzeichnisinhaltsynchronisieren von "{0}" zu "{1}" endete erfolgreich.</value>
+  </data>
+  <data name="SynchronizationFailed" xml:space="preserve">
+    <value>Verzeichnisinhaltsynchronisieren von "{0}" zu "{1}" ging schief.</value>
+  </data>
+  <data name="SynchronizationAborted" xml:space="preserve">
+    <value>Verzeichnisinhaltsynchronisieren von "{0}" zu "{1}" wurde unterbrochen:
+{2}</value>
+  </data>
+  <data name="MissingDirectory" xml:space="preserve">
+    <value>Das Quellenverzeichnis "{0}" existiert nicht.</value>
+  </data>
+  <data name="ListingChildrenFailed" xml:space="preserve">
+    <value>Lesen Kinderliste von "{0}" ging schief:
+{1}</value>
+  </data>
+  <data name="DeletingItemFailed" xml:space="preserve">
+    <value>Löschen von "{0}" ging schief:
+{1}</value>
+  </data>
+  <data name="CopyingFileFailed" xml:space="preserve">
+    <value>Kopieren von "{0}" zu "{1}" ging schief:
+{2}</value>
+  </data>
+  <data name="UpdatingFileFailed" xml:space="preserve">
+    <value>Aktualisieren von "{1}" kopiert von "{0}" ging schief:
+{2}</value>
+  </data>
+  <data name="CheckingFileFailed" xml:space="preserve">
+    <value>Vergleichen "{0}" mit "{1}" ging schief:
+{2}</value>
+  </data>
+  <data name="PreparationFailed" xml:space="preserve">
+    <value>{0} ging schief:
+{1}</value>
+  </data>
+  <data name="CreatingFolderFailed" xml:space="preserve">
+    <value>Erzeugen von "{0}" ging schief:
+{1}</value>
+  </data>
+  <data name="MakingWritable" xml:space="preserve">
+    <value>"{1}" schreibbar zu machen</value>
+  </data>
+</root>

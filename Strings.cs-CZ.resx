@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SynchronizationStarted" xml:space="preserve">
+    <value>Synchronizace obsahu adresářů "{0}" s "{1}" začala.</value>
+  </data>
+  <data name="SynchronizationSucceeded" xml:space="preserve">
+    <value>Synchronizace obsahu adresářů "{0}" s "{1}" úspěšně skončila.</value>
+  </data>
+  <data name="SynchronizationFailed" xml:space="preserve">
+    <value>Synchronizace obsahu adresářů "{0}" s "{1}" selhala.</value>
+  </data>
+  <data name="SynchronizationAborted" xml:space="preserve">
+    <value>Synchronizace obsahu adresářů "{0}" s "{1}" byla přerušena:
+{2}</value>
+  </data>
+  <data name="MissingDirectory" xml:space="preserve">
+    <value>Zdrojový adresář "{0}" neexistuje.</value>
+  </data>
+  <data name="ListingChildrenFailed" xml:space="preserve">
+    <value>Čtení seznamu dětí "{0}" selhalo:
+{1}</value>
+  </data>
+  <data name="DeletingItemFailed" xml:space="preserve">
+    <value>Mazání "{0}" selhalo:
+{1}</value>
+  </data>
+  <data name="CopyingFileFailed" xml:space="preserve">
+    <value>Kopírování "{0}" do "{1}" selhalo:
+{2}</value>
+  </data>
+  <data name="UpdatingFileFailed" xml:space="preserve">
+    <value>Aktualizování "{1}" kopírovaného z "{0}" selhalo:
+{2}</value>
+  </data>
+  <data name="CheckingFileFailed" xml:space="preserve">
+    <value>Porovnávání "{0}" s "{1}" selhalo:
+{2}</value>
+  </data>
+  <data name="PreparationFailed" xml:space="preserve">
+    <value>{0} selhalo:
+{1}</value>
+  </data>
+  <data name="CreatingFolderFailed" xml:space="preserve">
+    <value>Vytváření "{0}" selhalo:
+{1}</value>
+  </data>
+  <data name="MakingWritable" xml:space="preserve">
+    <value>Nastavení "{1}" zapisovatelným</value>
+  </data>
+</root>

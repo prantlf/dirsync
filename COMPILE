@@ -1,0 +1,52 @@
+REQUIREMENTS
+  .NET Framework 3.5 or newer or Mono 2.4 or newer is necessary to run te tool.
+  Visual Studio 2010 or Monodevelop 2.4 is recommended to compile its sources.
+  The tool is managed as a command-line project with sources written in C#.
+
+FILES
+  app.config            - Application configuration to set up tracing.
+  Arguments.cs          - Encapsulates the access to command line arguments
+                          including the description of the options. 
+  CommandLine.cs        - Defines the command line parameters and options,
+                          checks for the completess and offers access to them.
+  Copier.cs             - Provides a common implementation for operations
+                          that write new and updated files and create folders
+                          (Updater and Creator).
+  Creator.cs            - Implements creating of files and folders in the
+                          target directory that exist only in the source one.
+  Deletor.cs            - Implements deleting of files and folders from the
+                          target directory that do not exist in the source one.
+  EventArgs.cs          - EventArgs descendants used in event handlers that are
+                          called during the tool's run to allow statistics
+                          gathering and progress printing.
+  ExceptionExtension.cs - Extensions that make the interfacet of exception
+                          classes more convenient to use.
+  Formatter.cs          - Formats values printed as statistics on the console
+                          (volume size, time spent).
+  Informers.cs          - Event handlers that print the progress of the current
+                          operation and final statistics on the console.
+  Monitors.cs           - Event handlers that gather various statistics during
+                          the operation run.
+  Program.cs            - Serves as the main program entry point. It parses the
+                          command line, checks the arguments and prints the logo
+                          and a usage summary. If there's an operation to perform
+                          it creates the corresponding synchronizer, monitor,
+                          informer and tracer and starts the operation. If not
+                          customized the three operations are performed in this
+                          order: delete, update and create.
+  Properties/
+    AssemblyInfo.cs     - Contains attributes with informationabout this tool.
+                          written to the compiled executable.
+  Resources.cs          - Accesses localized resource strings.
+  Strings.resx          - Contains English resource strings.
+  Strings.???.resx      - Contains localized resource strings.
+  Synchronizer.cs       - Provides a base implementation for all operations -
+                          recursive directory walking and children listing.
+  Tracers.cs            - Event handlers that trace warnings and errors to the
+                          configured trace source named "dirsync".
+  Updater.cs            - Implements updating of files in the target directory
+                          that exist also in the source one but that are
+                          different there; either of a different size or with a
+                          different last modification time.
+  WrappingConsole.cs    - Writes on the console breaking too long likes on the
+                          word boundary if necessary.

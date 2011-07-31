@@ -1,20 +1,20 @@
-﻿// Copyright (C) 2009-2011 Ferdinand Prantl <prantlf@gmail.com>
+// Copyright (C) 2009-2011 Ferdinand Prantl <prantlf@gmail.com>
 // All rights reserved.       
 //
 // This file is part of dirsync - directory content synchronization tool.
 //
-// dirsync is free software: you can redistribute it and/or modify
+// This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// dirsync is distributed in the hope that it will be useful,
+// This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with dirsync.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -25,52 +25,100 @@ namespace dirsync
 {
     abstract class Synchronizer
     {
-        protected readonly IEnumerable<Exclusion> exclude;
-        protected int level;
+        public IEnumerable<Exclusion> Exclude { get; set; }
 
-        protected Synchronizer(IEnumerable<Exclusion> exclude) {
-            if (exclude == null)
-                throw new ArgumentNullException("exclude");
-            this.exclude = exclude;
-        }
+        public bool Recursive { get; set; }
 
-        public abstract bool Synchronize(string sourcedir, string targetdir);
+        public int CurrentLevel { get; private set; }
+
+        public event EventHandler<StartingOperationEventArgs> EnteringDirectory;
+
+        public event EventHandler<BeforeOperationEventArgs> MissingDirectory;
+
+        public event EventHandler<FinishedOperationEventArgs> LeavingDirectory;
+
+        public event EventHandler<FinishedOperationEventArgs> SkippingDirectory;
+
+        public event EventHandler<FailedOperationEventArgs> ListingChildrenFailed;
+
+        public abstract void Synchronize(string sourcedir, string targetdir);
 
         protected bool CheckSourceDirectory(string sourcedir) {
             if (!Directory.Exists(sourcedir)) {
-                Console.WriteLine("Source directory \"{0}\" does not exist.", sourcedir);
+                FireMissingDirectory(sourcedir);
                 return false;
             }
-            Console.WriteLine("Entering \"{0}\" (level {1})...", sourcedir, level);
             return true;
         }
 
-        protected bool ProcessDirectories(string sourcedir, string targetdir) {
-            var directories = FileSystem.ListDirectories(sourcedir);
-            if (directories == null)
-                return false;
-            var result = true;
-            foreach (var directory in directories) {
-                var name = Path.GetFileName(directory);
-                if (name != "." && name != "..")
-                    result &= ProcessDirectory(sourcedir, targetdir, name);
-            }
-            return result;
+        protected void ProcessDirectories(string sourcedir, string targetdir) {
+            var directories = ListFolders(sourcedir, targetdir);
+            if (directories != null)
+                foreach (var directory in directories) {
+                    var name = Path.GetFileName(directory);
+                    if (name != "." && name != "..")
+                        ProcessDirectory(sourcedir, targetdir, name);
+                }
         }
 
-        bool ProcessDirectory(string sourcedir, string targetdir, string name) {
+        void ProcessDirectory(string sourcedir, string targetdir, string name) {
             var sourcepath = Path.Combine(sourcedir, name);
             var targetpath = Path.Combine(targetdir, name);
-            if (exclude.Any(item => item.Applies(name, level))) {
-                Console.WriteLine("Skipping directory \"{0}\".", sourcepath);
-                return true;
+            if (Exclude.Any(item => item.Applies(name, CurrentLevel))) {
+                FireSkippingDirectory(sourcepath, targetpath);
+                return;
             }
-            ++level;
+            ++CurrentLevel;
             try {
-                return Synchronize(sourcepath, targetpath);
+                Synchronize(sourcepath, targetpath);
             } finally {
-                --level;
+                --CurrentLevel;
             }
+        }
+
+        protected string[] ListFiles(string sourcedir, string targetdir) {
+            try {
+                return Directory.GetFiles(sourcedir);
+            } catch (Exception exception) {
+                FireListingChildrenFailed(sourcedir, targetdir, exception);
+                return null;
+            }
+        }
+
+        protected string[] ListFolders(string sourcedir, string targetdir) {
+            try {
+                return Directory.GetDirectories(sourcedir);
+            } catch (Exception exception) {
+                FireListingChildrenFailed(sourcedir, targetdir, exception);
+                return null;
+            }
+        }
+
+        protected void FireEnteringDirectory(string sourcepath, string targetpath) {
+            if (EnteringDirectory != null)
+                EnteringDirectory(this, new StartingOperationEventArgs(sourcepath, targetpath));
+        }
+
+        protected void FireMissingDirectory(string sourcepath) {
+            if (MissingDirectory != null)
+                MissingDirectory(this, new BeforeOperationEventArgs(sourcepath));
+        }
+
+        protected void FireLeavingDirectory(string sourcepath, string targetpath) {
+            if (LeavingDirectory != null)
+                LeavingDirectory(this, new FinishedOperationEventArgs(sourcepath, targetpath));
+        }
+
+        protected void FireSkippingDirectory(string sourcepath, string targetpath) {
+            if (SkippingDirectory != null)
+                SkippingDirectory(this, new FinishedOperationEventArgs(sourcepath, targetpath));
+        }
+
+        protected void FireListingChildrenFailed(string sourcepath, string targetpath,
+                                                 Exception exception) {
+            if (ListingChildrenFailed != null)
+                ListingChildrenFailed(this, new FailedOperationEventArgs(sourcepath, targetpath,
+                                                                         exception));
         }
     }
 }

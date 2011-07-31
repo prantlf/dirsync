@@ -3,18 +3,18 @@
 //
 // This file is part of dirsync - directory content synchronization tool.
 //
-// dirsync is free software: you can redistribute it and/or modify
+// This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// dirsync is distributed in the hope that it will be useful,
+// This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with dirsync.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -39,6 +39,7 @@ namespace dirsync
             if (!Help) {
                 Source = GetSource(this);
                 Target = GetTarget(this);
+                Recursive = !IsSwitchDisabled("recursive");
                 Operation = GetOperation(this);
                 Exclude = GetExclude(this).ToList();
             }
@@ -49,6 +50,8 @@ namespace dirsync
         public string Source { get; private set; }
 
         public string Target { get; private set; }
+
+        public bool Recursive { get; private set; }
 
         public Operation Operation { get; private set; }
 
@@ -63,14 +66,19 @@ namespace dirsync
                             Description = "Prints this usage information."
                         },
                         new Option {
+                            Name = "recursive", Abbreviation = "r", Usage = "recursive[+|-]",
+                            Description = "Chooses recursive processing of subdirectories " +
+                                "(default) or just the specified source directory."
+                        },
+                        new Option {
                             Name = "operations", Abbreviation = "o", Usage = "operations:<names>",
                             Description = "Comma-delimited list of operations to execute; " +
                                 "all is default."
                         },
                         new Option {
                             Name = "exclude", Abbreviation = "e", Usage = "exclude:<names>",
-                            Description = "Comma-delimited list of exclusions; file or folder " +
-                                "names with optional nested level to exclude from the operations."
+                            Description = "Comma-delimited list of exclusions; folder names " +
+                                "with optional nested level to exclude from the operations."
                         },
                     };
                 return options;

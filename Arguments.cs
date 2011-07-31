@@ -3,18 +3,18 @@
 //
 // This file is part of dirsync - directory content synchronization tool.
 //
-// dirsync is free software: you can redistribute it and/or modify
+// This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// dirsync is distributed in the hope that it will be useful,
+// This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with dirsync.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ using System.Text;
 
 namespace dirsync
 {
-    public class Option
+    class Option
     {
         public string Name { get; set; }
         public string Abbreviation { get; set; }
@@ -31,7 +31,7 @@ namespace dirsync
         public string Description { get; set; }
     }
 
-    public class Arguments
+    class Arguments
     {
         public Arguments(string line) : this(line, null) {}
 
@@ -47,7 +47,7 @@ namespace dirsync
         public Arguments(IEnumerable<string> args, IEnumerable<Option> options) {
             if (args == null)
                 throw new ArgumentNullException("args");
-            Switches = new Dictionary<string, bool>(StringComparer.CurrentCultureIgnoreCase);
+            Switches = new Dictionary<string, bool?>(StringComparer.CurrentCultureIgnoreCase);
             Variables = new Dictionary<string, string>(StringComparer.CurrentCultureIgnoreCase);
             Parameters = args;
             Options = options;
@@ -62,9 +62,10 @@ namespace dirsync
                     Variables[name] = value;
                 } else {
                     name = GetOptionName(name);
-                    bool value = true;
+                    bool? value = null;
                     if (name.EndsWith("+")) {
                         name = argument.Substring(0, name.Length - 1);
+                        value = true;
                     } else if (name.EndsWith("-")) {
                         name = name.Substring(0, name.Length - 1);
                         value = false;
@@ -77,7 +78,7 @@ namespace dirsync
 
         public IEnumerable<Option> Options { get; private set; }
 
-        public IDictionary<string, bool> Switches { get; private set; }
+        public IDictionary<string, bool?> Switches { get; private set; }
 
         public IDictionary<string, string> Variables { get; private set; }
 
@@ -86,8 +87,21 @@ namespace dirsync
         public bool HasSwitch(string name) {
             if (name == null)
                 throw new ArgumentNullException("name");
-            bool value;
-            return Switches.TryGetValue(name, out value) && value;
+            return Switches.ContainsKey(name);
+        }
+
+        public bool IsSwitchEnabled(string name) {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            bool? value;
+            return Switches.TryGetValue(name, out value) && value != false;
+        }
+
+        public bool IsSwitchDisabled(string name) {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            bool? value;
+            return Switches.TryGetValue(name, out value) && value == false;
         }
 
         public string GetVariable(string name) {
